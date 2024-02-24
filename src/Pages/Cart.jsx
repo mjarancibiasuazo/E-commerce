@@ -1,8 +1,11 @@
 import React from 'react'
+import CardItems from '../Components/CardItems/CardItems'
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <div>
+      <CardItems />
+    </div>
   )
 }
 
