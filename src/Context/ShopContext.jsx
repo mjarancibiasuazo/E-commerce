@@ -14,7 +14,7 @@ se carga el componente ShopContextProvider.*/}
 const getDefaultCart = () => {
     let cart = {};
 
-    for (let index = 0; index < all_product.length; index++) {
+    for (let index = 0; index < all_product.length+1; index++) {
             cart[ index ] = 0;
         }
         return cart;
@@ -41,12 +41,41 @@ respectivamente. Estas funciones actualizan el estado del carrito de compras uti
         setCartItems(( prev ) => ({...prev, [ itemId ]:prev[itemId]-1 }))
     }
 
+    {/*TOTAL PRECIO PRODUCTOS */}
+    const getTotalCartAmount = () => {
+        let totalAmount = 0;
+        for( const item in cartItems )
+        {
+            if( cartItems[ item ]>0 )
+            {
+
+                let itemInfo = all_product.find(( product )=> product.id===Number(item ))
+                totalAmount += itemInfo.new_price * cartItems[ item ];
+            }
+           
+        }
+        return totalAmount;
+    }
+
+    const getTotalCartItems = () => {
+        let totalItem = 0;
+        for( const item in cartItems )
+        {
+            if( cartItems[item]>0)
+            {
+                totalItem+= cartItems[ item ]
+            }
+            
+        }
+        return totalItem;
+    }
+
 {/*Crea un objeto contextValue que contiene el inventario de productos, el carrito de compras y las funciones para agregar y eliminar 
 elementos del carrito.
 Envuelve los componentes secundarios dentro del componente ShopContext.Provider, proporcionando el valor del contexto a través de la 
 propiedad value. Esto permite que los componentes secundarios accedan a los datos y funciones proporcionadas por el contexto.
 Finalmente, devuelve los componentes secundarios encapsulados dentro del proveedor de contexto.*/}
-    const contextValue = { all_product, cartItems, addToCart, removeFromCart }
+    const contextValue = {  getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart }
     return (
         <ShopContext.Provider value={ contextValue }>
             { props.children }

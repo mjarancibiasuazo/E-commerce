@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import './CardItems.css'
-import { ShopContext } from '../../Context/ShopContext'
+import './CartItems.css'
+import { ShopContext } from '../../context/ShopContext'
 import remove_icon from '../Assets/cart_cross_icon.png'
 
-const CardItems = () => {
-    const { all_product, cartItems, removeFromCart } = useContext( ShopContext )
+const CartItems = () => {
+    const {  getTotalCartAmount, all_product, cartItems, removeFromCart } = useContext( ShopContext )
   return (
   <div className="cartitems">
         <div className="cartitems-format-main">
@@ -40,7 +40,7 @@ const CardItems = () => {
                 <div>
                     <div className="cartitems-total-item">
                         <p>Subtotal</p>
-                        <p>${ 0 }</p>
+                        <p>${getTotalCartAmount()}</p>
                     </div>
                     <hr/>
                     <div className="cartitems-total-item">
@@ -50,7 +50,7 @@ const CardItems = () => {
                     <hr/>
                     <div className="cartitems-total-item">
                         <h3>Total</h3>
-                        <h3>${ 0 }</h3>
+                        <h3>${getTotalCartAmount()}</h3>
                     </div>
                 </div>
                 <button>PROCESO DE CHECKOUT</button>
@@ -58,14 +58,14 @@ const CardItems = () => {
             <div className="cartitems-promocode">
                 <p>Si tu tienes un código promocional, entra aquí</p>
                 <div className="cartitems-promobox">
-                    <input type="text" placeholder="Código Promoción" />
+                    <input name="codigo" type="text" placeholder="Código Promoción" />
                     <button>Submit</button>
                 </div>
             </div>
         </div>
-        
-  </div>
+    </div>
+
   )
 }
 
-export default CardItems 
+export default CartItems 
